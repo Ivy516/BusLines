@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    name: buslines
+    url: jdbc:mysql://localhost:3306/buslines
+    username: root
+    password: Ivy161420
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:/mybatis/*.xml
+  type-aliases-package: com.example.busline.bean
