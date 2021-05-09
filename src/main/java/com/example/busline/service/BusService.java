@@ -5,5 +5,6 @@ import com.example.busline.bean.Route;
 import java.util.List;
 
 public interface BusService {
-    List<Route> getLine(String stop);
+    String getTableName(String busName);
+    List<Route> getLines(String busName);
 }

@@ -13,7 +13,6 @@ public class BusLineApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BusLineApplication.class, args);
-
     }
 
 }

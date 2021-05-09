@@ -14,8 +14,15 @@ public class BusServiceImpl implements BusService{
     private GetBusMapper getBusMapper;
 
     @Override
-    public List<Route> getLine(String stop) {
-        System.out.println("BusService = "+stop);
-        return getBusMapper.getBus(stop);
+    public String getTableName(String busName) {
+        System.out.println("BusService = "+busName);
+        return getBusMapper.getBusTableName(busName);
+    }
+
+    @Override
+    public List<Route> getLines(String busName) {
+        String tableName = getTableName(busName);
+        System.out.println("获取到的table = "+ tableName);
+        return getBusMapper.getBusLines(tableName);
     }
 }
