@@ -25,4 +25,28 @@ public class BusServiceImpl implements BusService{
         System.out.println("获取到的table = "+ tableName);
         return getBusMapper.getBusLines(tableName);
     }
+
+    @Override
+    public void deleteLine(String name) {
+        String tableName = getBusMapper.getBusTableName(name);
+        getBusMapper.deleteLine(tableName);
+    }
+
+    @Override
+    public void modifyBusData(String busName, String name, String value) {
+        String tableName = getTableName(busName);
+        getBusMapper.modifyBusData(tableName, name, value);
+    }
+
+    @Override
+    public void modifyBusData(String busName, String name, float value) {
+        String tableName = getTableName(busName);
+        getBusMapper.modifyBusData(tableName, name, value);
+    }
+
+    @Override
+    public void modifyBusLine(String busName, int position, String stopName) {
+        String tableName = getTableName(busName);
+        getBusMapper.modifyBusLine(tableName, position, stopName);
+    }
 }

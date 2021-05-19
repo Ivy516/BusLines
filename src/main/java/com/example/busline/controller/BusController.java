@@ -6,7 +6,6 @@ import com.example.busline.bean.User;
 import com.example.busline.service.BusService;
 import com.example.busline.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.sql.DataSource;
@@ -23,6 +22,7 @@ public class BusController {
     @Autowired
     private DataSource dataSource;
 
+    //获取公交线路
     @RequestMapping(value = "/getBusLines" , method = RequestMethod.GET)
     @ResponseBody
     public ApiResult getBusLines(@RequestParam("busName") String busName) throws SQLException {
@@ -53,7 +53,7 @@ public class BusController {
 
     @Autowired
     private UserService userService;
-    //用户连接
+    //用户登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ApiResult login(@RequestParam("userName") String userName,
@@ -70,5 +70,35 @@ public class BusController {
         return result;
     }
 
+    @RequestMapping(value = "/deleteLine", method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteLine(@RequestParam("busName") String busName) {
+        busService.deleteLine(busName);
+        return "success";
+    }
+
+    @RequestMapping(value = "/modifyBusData", method = RequestMethod.POST)
+    @ResponseBody
+    public String modifyBusData(@RequestParam("busName") String busName,
+                             @RequestParam("name") String name,
+                             @RequestParam("value") String value) {
+        float values;
+        if (name.equals("price") || name.equals("distance")) {
+            values = Float.valueOf(value);
+            busService.modifyBusData(busName, name, values);
+        } else {
+            busService.modifyBusData(busName, name, value);
+        }
+        return "success";
+    }
+
+    @RequestMapping(value = "/modifyBusLine", method = RequestMethod.POST)
+    @ResponseBody
+    public String modifyBusLine(@RequestParam("busName") String busName,
+                             @RequestParam("position") String position,
+                             @RequestParam("name") String stopName) {
+        busService.modifyBusLine(busName, Integer.valueOf(position), stopName);
+        return "success";
+    }
 
 }
