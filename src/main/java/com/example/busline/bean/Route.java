@@ -2,8 +2,26 @@ package com.example.busline.bean;
 
 public class Route {
     private int position;
-    private int isArrived;
     private String stop;
+    private int isArrived;
+    private double latitude;
+    private double longitude;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
     public String getStop() {
         return stop;
@@ -25,7 +43,7 @@ public class Route {
         return isArrived;
     }
 
-    public void setIsArrived(int route) {
+    public void setIsArrived(int isArrived) {
         this.isArrived = isArrived;
     }
 }

@@ -22,6 +22,9 @@ public interface GetBusMapper {
     @Select("drop table ${tableName}")
     void deleteLine(String tableName);
 
+    @Select("update bus_table set busName=#{newBusName} where busName=#{oldBusName}")
+    void modifyBusName(String newBusName,String oldBusName);
+
     @Select("update bus set ${name}=#{value} where route=#{tableName}")
     void modifyBusData(String tableName, String name, String value);
     void modifyBusData(String tableName, String name, float value);
@@ -29,4 +32,28 @@ public interface GetBusMapper {
     @Select("update ${busName} set stop=#{stopName} where position=#{position}")
     void modifyBusLine(String busName, int position, String stopName);
 
+    @Select("select busName from bus_table where busName=#{busName}")
+    String getBus(String busName);
+
+    @Select("CREATE TABLE r123 (position INT," +
+            "stop VARCHAR(50)," +
+            "isArrived INT ," +
+            "latitude DOUBLE , " +
+            "longitude DOUBLE," +
+            "PRIMARY KEY(position))")
+    void creatTable(String tableName);
+
+    @Select("insert into bus_table (busName,tableName) values (#{busName},#{busTable})")
+    void addBusTable(String busName,String busTable);
+
+    @Select("insert into bus (start_time,end_time,price,distance,name," +
+            "route) values (#{startTime},#{endTime},#{price}," +
+            "#{distance},#{name},#{route})")
+    void insertBusData(String startTime,String endTime, float price, float distance,
+                       String name, String route);
+
+    @Select("insert into ${tableName} (position,stop,isArrived, latitude,longitude)" +
+            "values (#{position},#{stop},#{isArrived},#{latitude},#{longitude})")
+    void insertLine(String tableName, int position, String stop,int isArrived,
+                    double latitude,double longitude);
 }

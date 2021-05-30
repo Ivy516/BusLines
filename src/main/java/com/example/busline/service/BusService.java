@@ -11,4 +11,7 @@ public interface BusService {
     void modifyBusData(String busName, String name, String value);
     void modifyBusData(String busName, String name, float value);
     void modifyBusLine(String busName, int position, String name);
+    boolean addBusData(String busName, String startTime, String endTime,
+                       float price, float distance);
+    void addBusLine(String busName,List<Route> lines);
 }

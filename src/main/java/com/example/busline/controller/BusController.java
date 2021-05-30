@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class BusController {
+    private List<Route> mLines;
 
     @Autowired
     private BusService busService;
@@ -98,6 +99,35 @@ public class BusController {
                              @RequestParam("position") String position,
                              @RequestParam("name") String stopName) {
         busService.modifyBusLine(busName, Integer.valueOf(position), stopName);
+        return "success";
+    }
+
+    //增加公交数据
+    @RequestMapping(value = "/addBusData", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean addBusData(@RequestParam("busName") String busName,
+                           @RequestParam("startTime") String startTime,
+                           @RequestParam("endTime") String endTime,
+                           @RequestParam("price") float price,
+                           @RequestParam("distance") float distance) {
+
+        System.out.println(busName + ", " + startTime + ", " + endTime +", "
+        + price + ", " + distance);
+
+        return busService.addBusData(busName,startTime,endTime,price,distance);
+    }
+
+    //增加路线
+    @RequestMapping(value = "/addLine",method = RequestMethod.POST)
+    public String addLine(@RequestParam("busName") String busName,
+                          @RequestBody List<Route> lines) {
+        mLines = lines;
+        System.out.println(busName);
+        for (Route route: lines) {
+            System.out.println(route.getPosition() + " " + route.getStop() + " "
+            + route.getIsArrived() + " " + route.getLatitude() + " " + route.getLongitude());
+        }
+        busService.addBusLine(busName,mLines);
         return "success";
     }
 

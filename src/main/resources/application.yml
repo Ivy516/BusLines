@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://39.96.15.89:3306/buslines
     username: root
     password: Ivy161420
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath:/mybatis/*.xml
